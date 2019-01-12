@@ -32,7 +32,8 @@ export class YouTubeVideo{
         this.avgRating = parseFloat(data.avg_rating);
         this.isLive = data.player_response.videoDetails.isLiveContent;
         this.language = data.hl;
-        this.caption = new Caption(data.player_response.captions.playerCaptionsTracklistRenderer);
+        if(data.player_response.captions)
+            this.caption = new Caption(data.player_response.captions.playerCaptionsTracklistRenderer);
         this.streamingData = new StreamingData(data.player_response.streamingData);
     }
 
