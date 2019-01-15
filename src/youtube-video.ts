@@ -2,7 +2,7 @@ import axios from 'axios';
 import * as queryString from 'query-string';
 import * as xml2js from 'xml2js';
 
-export const YOUTUBE_VIDEO_INFO_URL: string = 'https://youtube.com/get_video_info?video_id={videoId}';
+export const YOUTUBE_VIDEO_INFO_URL: string = 'https://youtube.com/get_video_info?video_id={videoId}&el=detailpage';
 
 export class YouTubeVideo{
 
@@ -34,7 +34,8 @@ export class YouTubeVideo{
         this.language = data.hl;
         if(data.player_response.captions)
             this.caption = new Caption(data.player_response.captions.playerCaptionsTracklistRenderer);
-        this.streamingData = new StreamingData(data.player_response.streamingData);
+        if(data.player_response.streamingData)
+            this.streamingData = new StreamingData(data.player_response.streamingData);
     }
 
     static async fetch(videoId: string): Promise<YouTubeVideo>{
