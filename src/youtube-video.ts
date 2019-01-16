@@ -18,6 +18,7 @@ export class YouTubeVideo{
     isLive: boolean
     caption: Caption
     language: string
+    playabilityStatus: PlayabilityStatus
     streamingData: StreamingData
 
     constructor(data: any){
@@ -32,6 +33,7 @@ export class YouTubeVideo{
         this.avgRating = parseFloat(data.avg_rating);
         this.isLive = data.player_response.videoDetails.isLiveContent;
         this.language = data.hl;
+        this.playabilityStatus = new PlayabilityStatus(data.player_response.playabilityStatus)
         if(data.player_response.captions)
             this.caption = new Caption(data.player_response.captions.playerCaptionsTracklistRenderer);
         if(data.player_response.streamingData)
@@ -196,6 +198,20 @@ export class MimeType {
     constructor(data: string){
         this.type = data.substr(0, data.indexOf(';'));
         this.codec = data.substr(data.indexOf(';') + 2).trim().replace('codecs="', '').replace('"', '');
+    }
+
+}
+
+export class PlayabilityStatus {
+
+    status: string
+    reason: string
+
+    constructor(data: any){
+        if(data){
+            this.status = data.status;
+            this.reason = data.reason;
+        }
     }
 
 }
