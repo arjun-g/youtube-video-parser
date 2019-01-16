@@ -1,6 +1,6 @@
 {
   "name": "youtube-video-parser",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Extract publicly available details related to a YouTube video",
   "main": "dist/youtube-video.js",
   "types": "dist/youtube-video.d.ts",

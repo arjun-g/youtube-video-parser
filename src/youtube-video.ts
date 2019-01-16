@@ -77,7 +77,10 @@ export class Caption {
     tracks: Array<CaptionTrack>
     
     constructor(data: any){
-        this.tracks = data.captionTracks.map(captionTrack => new CaptionTrack(captionTrack));
+        if(data.captionTracks)
+            this.tracks = data.captionTracks.map(captionTrack => new CaptionTrack(captionTrack));
+        else
+            this.tracks = [];
     }
 
 }
